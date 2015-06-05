@@ -20,8 +20,6 @@
 #     Optional passphrase to set on the key.
 #
 define sshkeys::create_ssh_key ($owner = undef, $group = undef, $create_ssh_dir = true, $ssh_keytype = 'rsa', $passphrase = '') {
-  notify { "Creating ssh key for ${owner} of type ${ssh_keytype}": }
-
   $homedir = getvar("::home_${name}")
 
   if $owner {
@@ -35,6 +33,8 @@ define sshkeys::create_ssh_key ($owner = undef, $group = undef, $create_ssh_dir 
   } else {
     $group_real = $name
   }
+
+  notify { "Creating ssh key for ${owner_real} of type ${ssh_keytype}": }
 
   if $create_ssh_dir {
     file { "${homedir}/.ssh":
