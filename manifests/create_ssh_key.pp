@@ -34,8 +34,6 @@ define sshkeys::create_ssh_key ($owner = undef, $group = undef, $create_ssh_dir 
     $group_real = $name
   }
 
-  notify { "Creating ssh key for ${owner_real} of type ${ssh_keytype}": }
-
   if $create_ssh_dir {
     file { "${homedir}/.ssh":
       ensure => directory,
