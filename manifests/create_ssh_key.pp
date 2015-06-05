@@ -19,13 +19,8 @@
 #   [*passphrase*]
 #     Optional passphrase to set on the key.
 #
-define sshkeys::create_ssh_key (
-  $owner          = undef,
-  $group          = undef,
-  $create_ssh_dir = true,
-  $ssh_keytype    = 'rsa',
-  $passphrase     = ''
-) {
+define sshkeys::create_ssh_key ($owner = undef, $group = undef, $create_ssh_dir = true, $ssh_keytype = 'rsa', $passphrase = '') {
+  notify { "Creating ssh key for ${owner} of type ${ssh_keytype}": }
 
   $homedir = getvar("::home_${name}")
 
